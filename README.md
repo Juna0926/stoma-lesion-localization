@@ -61,12 +61,13 @@ The project separates **where the clinically relevant region is** from the downs
 
 ## Project outputs
 
-- [`outputs/PROJECT_OUTPUTS.md`](outputs/PROJECT_OUTPUTS.md) - public-safe source manifest and quantitative evidence derived from the original project presentation.
+- [`outputs/localization-public-technical-excerpt.pdf`](outputs/localization-public-technical-excerpt.pdf) - curated public technical excerpt containing the non-clinical methodology and quantitative results.
+- [`outputs/PROJECT_OUTPUTS.md`](outputs/PROJECT_OUTPUTS.md) - source manifest, evidence notes, and public-release scope.
 - The original full presentation is **not redistributed publicly** because it contains clinical images.
 
 ## Data & privacy
 
-No original patient-captured stoma images are included in this repository. Public figures were selected specifically to avoid redistributing clinical imagery.
+No original patient-captured stoma images are included in this repository. The displayed diagrams are public-safe reconstructions derived from the project materials; the excerpt PDF was curated specifically to avoid redistributing clinical imagery.
 
 ---
 
