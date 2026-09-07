@@ -13,7 +13,7 @@
 
 Remote stoma care depends on images captured by patients in heterogeneous real-world conditions. Lighting, distance, angle, background, and image quality vary considerably, while detailed bounding-box annotation is expensive. This project developed an automated lesion-localization workflow that combines a detector with annotation-efficient learning strategies.
 
-![Dataset structure](assets/figure-01-dataset-structure.png)
+![Dataset structure](assets/figure-01-dataset-structure.svg)
 
 ## Problem
 
@@ -31,7 +31,7 @@ The central problem was to obtain a stable lesion ROI before downstream conditio
 
 ### Pseudo-label selection
 
-![Pseudo-label selection results](assets/figure-02-pseudolabel-results.png)
+![Pseudo-label selection results](assets/figure-02-pseudolabel-results.svg)
 
 - **673 / 707** unlabeled images were selected as pseudo-labels in the reported selection stage.
 - Mean pseudo-label agreement with manual preprocessing: **IoU 0.7869**, **Dice Score 0.8723**.
@@ -57,11 +57,11 @@ The central problem was to obtain a stable lesion ROI before downstream conditio
 
 The project separates **where the clinically relevant region is** from the downstream prediction problem. Explicit ROI extraction gives later classification stages a more controlled visual input and provides a practical route for learning from limited manual annotations.
 
-![Conclusion](assets/figure-03-conclusion.png)
+![Conclusion](assets/figure-03-conclusion.svg)
 
 ## Project outputs
 
-- [`outputs/localization-public-technical-excerpt.pdf`](outputs/localization-public-technical-excerpt.pdf) - curated public technical excerpt.
+- [`outputs/PROJECT_OUTPUTS.md`](outputs/PROJECT_OUTPUTS.md) - public-safe source manifest and quantitative evidence derived from the original project presentation.
 - The original full presentation is **not redistributed publicly** because it contains clinical images.
 
 ## Data & privacy
