@@ -1,5 +1,14 @@
-data/raw/
+# Keep patient-level or otherwise non-public data out of the public repository.
+data/*
+!data/README.md
+
+# Local configuration / Python artifacts
 *.env
+.env*
 __pycache__/
+*.py[cod]
 .ipynb_checkpoints/
+
+# OS/editor artifacts
 .DS_Store
+Thumbs.db
