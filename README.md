@@ -21,6 +21,14 @@ Instead of relying on exhaustive manual annotation, the pipeline:
 
 The goal was to build a practical localization workflow that can learn clinically relevant regions even when detailed bounding-box annotation is scarce.
 
+## Portfolio-aligned main figure
+
+![Stoma lesion localization pipeline](https://raw.githubusercontent.com/Juna0926/Portfolio/main/assets/media/research-localization.webp)
+
+*Representative figure synchronized with the current Portfolio detail page: WSOL candidate generation → domain-informed pseudo-label refinement → Faster R-CNN retraining.*
+
+### Supporting repository figure
+
 ![Dataset structure](assets/figure-01-dataset-structure.svg)
 
 ## Research problem
