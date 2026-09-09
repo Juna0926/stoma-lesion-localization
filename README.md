@@ -1,53 +1,74 @@
 # Data-Efficient Stoma Lesion Localization via WSOL and Pseudo-Label Refinement with Domain Knowledge
 
-> A data-efficient lesion-localization pipeline for smartphone-captured stoma images under limited bounding-box annotation.
+> A data-efficient localization pipeline for smartphone-captured stoma images under extremely limited bounding-box supervision.
 
 **Period:** Feb. 2026 - Jun. 2026  
 **Affiliation:** Machine Learning & Data Mining Laboratory, Ajou University  
 **Type:** Collaborative medical-image research  
-**Core methods:** WSOL · Domain-guided pseudo-label refinement · Faster R-CNN
+**Core methods:** Weakly Supervised Object Localization (WSOL) · Domain-guided pseudo-label refinement · Faster R-CNN
 
 ---
 
 ## Overview
 
-This research addressed lesion localization in a **limited-annotation setting** with only **15 bounding-box-labeled images** and **707 unlabeled smartphone-captured stoma images**. Rather than relying on exhaustive manual annotation, the study generated candidate lesion regions through weak supervision, refined them using stoma-specific domain knowledge, and used the retained pseudo-labels to train a final detector.
+This research addressed lesion localization in a **limited-annotation setting** with only **15 bounding-box-labeled images** and **707 unlabeled smartphone-captured stoma images**.
+
+Instead of relying on exhaustive manual annotation, the pipeline:
+
+1. generates candidate lesion regions through **WSOL**,
+2. refines the candidates using **stoma-specific domain knowledge**, and
+3. retrains **Faster R-CNN** using the retained pseudo-labels.
+
+The goal was to build a practical localization workflow that can learn clinically relevant regions even when detailed bounding-box annotation is scarce.
 
 ![Dataset structure](assets/figure-01-dataset-structure.svg)
 
 ## Research problem
 
-Patient-captured stoma images vary in lighting, angle, distance, background, and image quality. At the same time, detailed lesion bounding-box annotation is expensive. The goal was therefore to build a pipeline that can learn clinically relevant lesion localization from **very limited bounding-box supervision** while making effective use of a much larger unlabeled image set.
+Patient-captured stoma images vary substantially in lighting, angle, distance, background, and image quality. Detailed lesion bounding-box annotation is also expensive and difficult to scale.
+
+The project therefore asked whether weak localization cues and domain knowledge could be combined to create useful pseudo-labels for detector training.
 
 ## Method
 
-1. **WSOL candidate generation** - generate candidate lesion regions from unlabeled stoma images.
-2. **Domain-knowledge refinement** - evaluate candidates using stoma-specific signals including red-color prominence, luminance contrast, orientation, and center proximity.
-3. **Pseudo-label retention** - retain candidates that satisfy the domain-informed refinement criteria.
-4. **Faster R-CNN retraining** - use refined pseudo-labels as additional training supervision for the final lesion detector.
-5. **Localization evaluation** - evaluate predicted regions with IoU and Dice Score.
+### 1. Candidate generation
+
+**Weakly Supervised Object Localization (WSOL)** was used to generate candidate lesion regions from unlabeled smartphone-captured stoma images.
+
+### 2. Domain-informed pseudo-label refinement
+
+Candidate regions were evaluated using stoma-specific visual signals including:
+
+- red-color prominence,
+- luminance contrast,
+- orientation, and
+- center proximity.
+
+These rules were used to filter unreliable WSOL candidates before detector retraining.
+
+### 3. Final detector
+
+The refined pseudo-labels were added as training supervision for **Faster R-CNN**, which served as the final lesion detector.
 
 ## Main results
 
 ![Pseudo-label selection results](assets/figure-02-pseudolabel-results.svg)
 
-- **673 / 707** candidate pseudo-labels were retained after domain-informed refinement.
-- Final detector **mean IoU: 0.7796**
-- Final detector **Dice score: 0.8681**
-
 | Metric | Result |
 |---|---:|
 | Bounding-box-labeled images | 15 |
 | Unlabeled images | 707 |
-| Retained pseudo-labels | **673** |
+| Retained pseudo-labels | **673 / 707** |
 | Mean IoU | **0.7796** |
 | Dice score | **0.8681** |
 
-## Research significance
+The final detector achieved **mean IoU 0.7796** and **Dice score 0.8681** after retaining 673 of 707 pseudo-label candidates.
 
-The main contribution is the use of **domain-knowledge-guided pseudo-label refinement** to make lesion localization more data-efficient. Instead of treating weakly localized regions as equally reliable, the pipeline uses medically relevant image characteristics to filter candidate regions before detector retraining.
+## Why this mattered
 
-This research also followed naturally from the earlier stoma-classification study: after identifying background shortcut learning in classification, the next step was to explicitly localize the clinically relevant region before downstream prediction.
+The key contribution is **domain-knowledge-guided pseudo-label refinement**. Rather than treating every weakly localized region as equally reliable, the pipeline filters candidates using medically relevant visual characteristics before detector retraining.
+
+This study also followed naturally from the earlier stoma-classification project. After identifying **background shortcut learning** in classification, this project explicitly localized the clinically relevant lesion region before downstream prediction.
 
 ![Conclusion](assets/figure-03-conclusion.svg)
 
@@ -62,13 +83,12 @@ This research also followed naturally from the earlier stoma-classification stud
 
 ## Public outputs
 
-- [`outputs/localization-public-technical-excerpt.pdf`](outputs/localization-public-technical-excerpt.pdf) - curated public technical excerpt containing non-clinical methodology and quantitative results.
-- [`outputs/PROJECT_OUTPUTS.md`](outputs/PROJECT_OUTPUTS.md) - source manifest, evidence notes, and public-release scope.
-- The original full presentation is not redistributed publicly because it contains clinical images.
+- [`outputs/localization-public-technical-excerpt.pdf`](outputs/localization-public-technical-excerpt.pdf) — curated public technical excerpt containing non-clinical methodology and quantitative results.
+- [`outputs/PROJECT_OUTPUTS.md`](outputs/PROJECT_OUTPUTS.md) — source manifest, evidence notes, and public-release scope.
 
 ## Data & privacy
 
-No original patient-captured stoma images are included in this repository. Public figures are limited to diagrams, quantitative summaries, and curated non-identifiable materials.
+No original patient-captured stoma images are included in this repository. Public materials are limited to diagrams, quantitative summaries, and curated non-identifiable artifacts.
 
 ---
 
